@@ -1,6 +1,7 @@
 import logging
 
 from fastapi import FastAPI
+from contextlib import asynccontextmanager
 
 from app.classes import CartInfo
 from app.validation import validate_values
@@ -18,9 +19,11 @@ logging.basicConfig (
 
 app = FastAPI(title="Calculator API")
 
-@app.on_event("startup")
-async def startup_event():
-	logging.FileHandler(LOG_FILE, "w")
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    logging.FileHandler(LOG_FILE, "w")
+    yield
 
 
 @app.post("/calculate-delivery-fee")
