@@ -14,24 +14,22 @@ Calculator works by recieving json of this type:
 
 **How to run**
 
-1. Create enviroment:
-- python -m venv .venv
+1. Make sure your device has Docker installed. If not, you can get it from the official Docker website.
 
-2. Activate with:
-- source .venv/bin/activate
+2. Build the docker image, this will run tests with pytest before production image
+	```
+	docker build -t delivery-fee-calculator .
+	```
 
-3. Install requirements
-- pip install -r requirements.txt
-
-4. Run app
-- uvicorn app.main:app --reload
-
-5. Trying it out
-- If you have FastAPI go to http://127.0.0.1:8000/docs
-- Or try with curl command (and try different values):
-  - curl -X POST -H "Content-Type: application/json" -d '{"cart_value": 790, "delivery_distance": 2235, "number_of_items": 4, "time": "2024-01-15T13:00:00Z"}' http://127.0.0.1:8000/calculate-delivery-fee
-
-6. Run tests from tests/
--pytest -W tests/
+3. Run container
+	```
+	docker run -p 8000:8000 delivery-fee-calculator
+	```
+4. Try the calculator
+   - Navigate to http://localhost:8000/docs and test the calculator with different values
+   - Optionally test the calculator with curl command, example:
+		```
+   		curl -X POST -H "Content-Type: application/json" -d '{"cart_value": 790, "delivery_distance": 2235, "number_of_items": 4, "time": "2024-01-15T13:00:00Z"}' http://localhost:8000/calculate-delivery-fee
+   		```
 
   
