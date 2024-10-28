@@ -1,6 +1,5 @@
 # Delivery-fee-calculator
-Delivery fee calculator done for internship application at Wolt.
-It calculates the delivery fee based on cart value, delivery distance, number of items, and time of order.
+Calculates delivery fee based on cart value, delivery distance, number of items, and time of order.
 
 Calculator works by recieving json of this type:
 ```
