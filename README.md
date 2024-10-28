@@ -23,7 +23,7 @@ Calculator works by recieving json of this type:
 
 3. Run container
 	```
-	docker run -p 8000:8000 delivery-fee-calculator
+	docker run -p 8000:8000 --name delivery-fee-calculator delivery-fee-calculator
 	```
 4. Try the calculator
    - Navigate to http://localhost:8000/docs and test the calculator with different values
@@ -31,5 +31,23 @@ Calculator works by recieving json of this type:
 		```
    		curl -X POST -H "Content-Type: application/json" -d '{"cart_value": 790, "delivery_distance": 2235, "number_of_items": 4, "time": "2024-01-15T13:00:00Z"}' http://localhost:8000/calculate-delivery-fee
    		```
+5. How to find and read events.log:
+   - Access container
+		```
+ 		docker exec -it delivery-fee-calculator /bin/bash
+ 		```
+   - Read events.log
+		```
+   		cat events.log
+   		```
+   - Exit container view
+		```
+   		exit
+  		```
+
+6.  Close app with ctrl + C if it is open in terminal, or
+	```
+ 	docker stop delivery-fee-calculator
+ 	```    
 
   
